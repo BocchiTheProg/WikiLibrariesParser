@@ -1,5 +1,6 @@
 require 'nokogiri'
 require 'open-uri'
+require 'csv'
 
 puts "Hello Nokogiri parser"
 libraries = []
@@ -20,3 +21,7 @@ end
 
 puts libraries.size
 puts libraries
+
+CSV.open('libraries.csv', 'w') do |csv|
+  libraries.each { |library| csv << [library]}
+end
