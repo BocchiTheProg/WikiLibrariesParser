@@ -2,7 +2,6 @@ require 'nokogiri'
 require 'open-uri'
 require 'csv'
 
-puts "Hello Nokogiri parser"
 libraries = []
 url = 'https://en.wikipedia.org/wiki/List_of_Libraries'
 doc = Nokogiri::HTML(URI.open(url))
@@ -19,9 +18,11 @@ doc.css('div#bodyContent h3').each do |alphabet_header|
   end
 end
 
-puts libraries.size
-puts libraries
-
 CSV.open('libraries.csv', 'w') do |csv|
-  libraries.each { |library| csv << [library]}
+  csv << ['ID', 'Library(Name, region, country)']
+  id = 1
+  libraries.each do  |library|
+    csv << [id, library]
+    id += 1
+  end
 end
