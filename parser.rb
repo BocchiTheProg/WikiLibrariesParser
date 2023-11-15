@@ -17,7 +17,7 @@ doc.css('div#bodyContent h3').each do |alphabet_header|
     if element.name == 'ul'
       element.css('li').each do |library|
         # adding libraries to array
-        libraries << library.text.strip
+        libraries << library.text.split(",").first.strip
       end
     end
     # searching ul elements after h3
@@ -28,7 +28,7 @@ end
 # output in CSV file
 CSV.open('libraries.csv', 'w') do |csv|
   # adding header(title)
-  csv << ['ID', 'Library Name (region and country)']
+  csv << ['ID', 'Library Name']
   id = 1
   libraries.each do  |library|
     csv << [id, library]
